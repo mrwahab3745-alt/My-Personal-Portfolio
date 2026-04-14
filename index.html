@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Portfolio | Web Developer</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="assets/LOGO-OFFICIAL.png">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a href="#home" class="logo-container">
+                <img src="./assets/LOGO-OFFICIAL.png" alt="My Logo" class="nav-logo">
+                <span class="logo-text">Wahab Ahmad</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <h1>Hello, I'm <span>Frontend Web Developer</span></h1>
+        <p>I create modern, high-performance, and responsive websites that bring your ideas to life.</p>
+        <div class="hero-btns">
+            <button onclick="location.href='#contact'">Hire Me</button>
+            <button class="secondary" onclick="location.href='#projects'">View Work</button>
+        </div>
+    </section>
+
+    <section id="about" class="about fade-in">
+        <h2>About Me</h2>
+        <p>
+            I'm a Frontend Developer who loves bringing designs to life through clean and efficient code. From modular
+            portfolio templates to "bulletproof" email signatures, I focus on creating accessible and high-performance
+            solutions. I enjoy simplifying complex ideas into intuitive, user-friendly experiences that make a lasting
+            impact.
+        </p>
+    </section>
+
+    <section id="services" class="services">
+        <h2 class="fade-in">My Services</h2>
+        <div class="service-container">
+            <div class="service-card">
+                <i class="fas fa-code"></i>
+                <h3>Web Design</h3>
+                <p>Modern and aesthetic UI/UX design tailored to your brand.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Responsive</h3>
+                <p>Websites that look stunning on desktops, tablets, and phones.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-briefcase"></i>
+                <h3>Portfolio</h3>
+                <p>Custom-built digital showcases designed to highlight your best work and experience.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-signature"></i>
+                <h3>E-mail Signature</h3>
+                <p>Professional, branded, and fully clickable signatures for every email you send.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <h2 class="fade-in">Recent Projects</h2>
+        <div class="project-container">
+            <div class="project-card">E-Commerce App</div>
+            <div class="project-card">SaaS Dashboard</div>
+            <div class="project-card">Creative Portfolio</div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact fade-in">
+        <h2>Contact Me</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>© 2026 Wahab Ahmad | Designed with Passion</p>
+    </footer>
+
+<script src="script.js"></script>
+</body>
+
+</html>
