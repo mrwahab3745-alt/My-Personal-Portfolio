@@ -47,7 +47,7 @@ contactForm.addEventListener('submit', (e) => {
 const roles = ["Front-end Developer", "Freelancer"]
 
 // --- 5. Typing Effect ---
-const texts = ["Frontend Developer", "UI/UX Designer", "Web Developer"];
+const texts = ["Frontend Developer", "UI/UX Designer", "Web Developer", "Freelancer"];
 let index = 0;
 let charIndex = 0;
 let isDeleting = false;
