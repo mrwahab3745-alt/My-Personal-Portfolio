@@ -27,6 +27,52 @@ html {
     backdrop-filter: blur(10px);
 }
 
+/* In spans ko lines mein badalna */
+.bar {
+    display: block;
+    /* Span ko block banana taake width/height le sakay */
+    width: 25px;
+    /* Line ki lambai */
+    height: 3px;
+    /* Line ki motai */
+    margin: 5px auto;
+    /* Lines ke darmiyan gap */
+    background-color: white;
+    /* Line ka rang */
+    transition: 0.4s;
+    /* Animation ke liye smooth waqt */
+}
+
+.mobile-menu-toggle {
+    display: none;
+    /* Shuru mein isay hide kar do (Desktop ke liye) */
+    background: none;
+    /* Button ka background khatam */
+    border: none;
+    /* Button ki border khatam */
+    cursor: pointer;
+    /* Mouse le jane par hath ka nishan aaye */
+    padding: 10px;
+}
+
+/* Jab menu khulay (active ho), to bars ko rotate karo */
+
+/* Pehli line ko rotate karo */
+.mobile-menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+/* Darmiyan wali line ko gayab kar do */
+.mobile-menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+/* Teesri line ko ulta rotate karo */
+.mobile-menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+
 .nav-logo {
     height: 40px;
 
@@ -137,6 +183,21 @@ html {
     color: #1e1e2f;
 }
 
+#typing {
+  color: #00bcd4;
+  font-weight: bold;
+  border-right: 2px solid #00bcd4;
+  padding-right: 10px;
+  letter-spacing: 0.1rem;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0% { border-color: transparent; }
+  50% { border-color: #00bcd4; }
+  100% { border-color: transparent; }
+}
+
 /* Sections General */
 section {
     padding: 80px 10%;
@@ -207,20 +268,48 @@ h2 {
 
 .project-card {
     width: 280px;
-    height: 180px;
     background: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     transition: 0.3s;
-    font-weight: 600;
+    overflow: hidden;
+    text-align: center;
+}
+
+.project-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.project-card h3 {
+    margin: 15px 0 10px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.project-card p {
+    margin: 0 15px 15px;
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
 }
 
 .project-card:hover {
     transform: scale(1.05);
-    color: #00b4ff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.project-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: 0.3s;
+}
+
+.project-link:hover .project-card {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 /* Contact Form */
@@ -281,21 +370,39 @@ footer {
     font-size: 14px;
 }
 
-/* Responsive Design */
-@media(max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        padding: 15px;
+/* --- Optimized Mobile Responsive Block --- */
+@media (max-width: 768px) {
+    
+    /* 1. Mobile par button dikhao */
+    .mobile-menu-toggle {
+        display: block;
     }
 
+    /* 2. Nav Links ko Dropdown banao aur hide karo */
     .nav-links {
+        display: none; /* Default hidden */
         flex-direction: column;
-        margin-top: 15px;
-        gap: 5px;
+        position: absolute;
+        top: 70px; /* Navbar ki height */
+        left: 0;
+        width: 100%;
+        background-color: rgba(26, 26, 26, 0.95);
+        padding: 20px 0;
+        z-index: 1000;
     }
 
+    /* 3. Jab Active class lage to dikhao */
+    .nav-links.active {
+        display: flex;
+    }
+
+    /* 4. Margin/Spacing theek karo mobile ke liye */
     .nav-links li {
-        margin: 5px 0;
+        margin: 10px 0;
+    }
+
+    .navbar {
+        padding: 15px 5%; /* Thori kam padding mobile par */
     }
 
     .contact form {
