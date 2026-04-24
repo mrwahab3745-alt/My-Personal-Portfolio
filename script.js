@@ -37,14 +37,53 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 });
 
 
-// --- 4. Form Submission Alert ---
-const contactForm = document.querySelector('form'); 
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert("Thank you! Form functionality is coming soon. Please contact me at: mrwahab3745-alt@example.com");
-    contactForm.reset(); // Form ko saaf karne ke liye
-});
-const roles = ["Front-end Developer", "Freelancer"]
+// --- 4. Contact Form Submission ---
+const contactForm = document.getElementById('contact-form');
+const formStatus = document.getElementById('form-status');
+const formSubmitEndpoint = 'https://formsubmit.co/ajax/mrwahab3745@gmail.com';
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        const formData = new FormData(contactForm);
+        const name = formData.get('name')?.toString().trim();
+        const email = formData.get('email')?.toString().trim();
+        const message = formData.get('message')?.toString().trim();
+
+        if (!name || !email || !message) {
+            formStatus.textContent = 'Please fill out all fields.';
+            return;
+        }
+
+        submitButton.disabled = true;
+        formStatus.textContent = 'Sending message...';
+
+        try {
+            const response = await fetch(formSubmitEndpoint, {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json'
+                },
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data?.message || 'Failed to send message.');
+            }
+
+            formStatus.textContent = 'Message sent successfully. I will contact you soon, InshaAllah.';
+            contactForm.reset();
+        } catch (error) {
+            formStatus.textContent = error.message || 'Something went wrong. Please try again.';
+        } finally {
+            submitButton.disabled = false;
+        }
+    });
+}
 
 // --- 5. Typing Effect ---
 const texts = ["Frontend Developer", "UI/UX Designer", "Web Developer", "Freelancer"];
