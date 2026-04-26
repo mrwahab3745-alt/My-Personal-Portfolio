@@ -40,15 +40,16 @@
     </header>
 
     <section id="home" class="hero">
+        <canvas id="hero-canvas" aria-hidden="true"></canvas>
         <h1>Hello, I'm a <span id="typing"></span></h1>
         <p>I create modern, high-performance, and responsive websites that bring your ideas to life.</p>
         <div class="hero-btns">
-            <button onclick="location.href='#contact'">Hire Me</button>
+            <button class="hire-btn" onclick="location.href='#contact'">Hire Me</button>
             <button class="secondary" onclick="location.href='#projects'">View Work</button>
         </div>
     </section>
 
-    <section id="about" class="about fade-in">
+    <section id="about" class="about reveal-on-scroll">
         <h2>About Me</h2>
         <p>
             I'm a Frontend Developer who loves bringing designs to life through clean and efficient code. From modular
@@ -58,8 +59,8 @@
         </p>
     </section>
 
-    <section id="services" class="services">
-        <h2 class="fade-in">My Services</h2>
+    <section id="services" class="services reveal-on-scroll">
+        <h2>My Services</h2>
         <div class="service-container">
             <div class="service-card">
                 <i class="fas fa-code"></i>
@@ -84,13 +85,18 @@
         </div>
     </section>
 
-    <section id="projects" class="projects">
-        <h2 class="fade-in">Recent Projects</h2>
+    <section id="projects" class="projects reveal-on-scroll">
+        <h2>Recent Projects</h2>
         <div class="project-container">
             <a href="https://mrwahab3745-alt.github.io/Email-Template/#" target="_blank" rel="noopener noreferrer" class="project-link">
                 <div class="project-card">
                     <img src="./assets/Email_temp.png" alt="Creative Email Signature">
                     <h3>Creative Email Signature</h3>
+                    <div class="project-badges">
+                        <span class="tech-badge">HTML</span>
+                        <span class="tech-badge">CSS</span>
+                        <span class="tech-badge">JavaScript</span>
+                    </div>
                     <p>A modern, fully clickable email signature with branding, contact details, social links, and a polished corporate look.</p>
                 </div>
             </a>
@@ -98,6 +104,12 @@
                 <div class="project-card">
                     <img src="./assets/Portfolio_img.png" alt="BMW Themed Portfolio">
                     <h3>BMW Themed Portfolio</h3>
+                    <div class="project-badges">
+                        <span class="tech-badge">HTML</span>
+                        <span class="tech-badge">CSS</span>
+                        <span class="tech-badge">JavaScript</span>
+                        <span class="tech-badge">GSAP</span>
+                    </div>
                     <p>A dark, cinematic BMW-inspired portfolio featuring bold typography, immersive hero visuals, and a premium performance theme.</p>
                 </div>
             </a>
@@ -105,13 +117,18 @@
                 <div class="project-card">
                     <img src="./assets/Landing_Page.png" alt="Landing Page">
                     <h3>Landing Page</h3>
+                    <div class="project-badges">
+                        <span class="tech-badge">HTML</span>
+                        <span class="tech-badge">CSS</span>
+                        <span class="tech-badge">JavaScript</span>
+                    </div>
                     <p>A conversion-focused landing page with clean sections, strong call-to-actions, trust metrics, and a minimal modern aesthetic.</p>
                 </div>
             </a>
         </div>
     </section>
 
-    <section id="contact" class="contact fade-in">
+    <section id="contact" class="contact reveal-on-scroll">
         <h2>Contact Me</h2>
         <form id="contact-form" action="https://formsubmit.co/mrwahab3745@gmail.com" method="POST">
             <input type="hidden" name="_subject" value="New Portfolio Contact Message">
