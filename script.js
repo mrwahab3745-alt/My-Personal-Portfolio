@@ -1,32 +1,38 @@
-// --- 1. Scroll Animations (Intersection Observer) ---
-const observerOptions = {
-    threshold: 0.12,
-    rootMargin: "0px 0px -40px 0px"
-};
+const gsapLib = window.gsap;
+const scrollTriggerPlugin = window.ScrollTrigger;
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('show');
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
+if (gsapLib && scrollTriggerPlugin) {
+    gsapLib.registerPlugin(scrollTriggerPlugin);
+    console.info(`GSAP verified: v${gsapLib.version}`);
+} else {
+    console.warn("GSAP or ScrollTrigger could not be loaded in the browser.");
+}
 
-const elementsToAnimate = document.querySelectorAll('.reveal-on-scroll, .fade-in, .service-card, .project-card');
-elementsToAnimate.forEach(el => observer.observe(el));
+function initRevealObserver() {
+    const observerOptions = {
+        threshold: 0.12,
+        rootMargin: "0px 0px -40px 0px"
+    };
 
-// --- 1.1 Hero Canvas Background Animation ---
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    const elementsToAnimate = document.querySelectorAll(".reveal-on-scroll, .fade-in, .service-card, .project-card");
+    elementsToAnimate.forEach((element) => observer.observe(element));
+}
+
 function initHeroCanvas() {
     const canvas = document.getElementById("hero-canvas");
     const hero = document.querySelector(".hero");
 
-    if (!canvas || !hero) {
-        return;
-    }
-
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reducedMotion) {
+    if (!canvas || !hero || prefersReducedMotion) {
         return;
     }
 
@@ -64,29 +70,29 @@ function initHeroCanvas() {
         ctx.clearRect(0, 0, width, height);
 
         for (let i = 0; i < particles.length; i++) {
-            const p = particles[i];
-            p.x += p.vx;
-            p.y += p.vy;
+            const particle = particles[i];
+            particle.x += particle.vx;
+            particle.y += particle.vy;
 
-            if (p.x <= 0 || p.x >= width) p.vx *= -1;
-            if (p.y <= 0 || p.y >= height) p.vy *= -1;
+            if (particle.x <= 0 || particle.x >= width) particle.vx *= -1;
+            if (particle.y <= 0 || particle.y >= height) particle.vy *= -1;
 
             ctx.beginPath();
-            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
             ctx.fillStyle = "rgba(0, 180, 255, 0.75)";
             ctx.fill();
 
             for (let j = i + 1; j < particles.length; j++) {
-                const p2 = particles[j];
-                const dx = p.x - p2.x;
-                const dy = p.y - p2.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
+                const nextParticle = particles[j];
+                const dx = particle.x - nextParticle.x;
+                const dy = particle.y - nextParticle.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
 
-                if (dist < 120) {
-                    const alpha = (1 - dist / 120) * 0.35;
+                if (distance < 120) {
+                    const alpha = (1 - distance / 120) * 0.35;
                     ctx.beginPath();
-                    ctx.moveTo(p.x, p.y);
-                    ctx.lineTo(p2.x, p2.y);
+                    ctx.moveTo(particle.x, particle.y);
+                    ctx.lineTo(nextParticle.x, nextParticle.y);
                     ctx.strokeStyle = `rgba(138, 43, 226, ${alpha})`;
                     ctx.lineWidth = 1;
                     ctx.stroke();
@@ -135,7 +141,7 @@ function initNavbarAnimations() {
         const marker = window.scrollY + navHeight + 70;
         let activeId = "";
 
-        pageSections.forEach(section => {
+        pageSections.forEach((section) => {
             const top = section.offsetTop;
             const bottom = top + section.offsetHeight;
 
@@ -144,7 +150,7 @@ function initNavbarAnimations() {
             }
         });
 
-        navAnchors.forEach(anchor => {
+        navAnchors.forEach((anchor) => {
             const target = anchor.getAttribute("href")?.replace("#", "");
             const shouldActivate = target && target === activeId;
             anchor.classList.toggle("active-link", Boolean(shouldActivate));
@@ -156,56 +162,58 @@ function initNavbarAnimations() {
     window.addEventListener("resize", updateNavbarState);
 }
 
+function initMobileMenu() {
+    const menuBtn = document.querySelector(".mobile-menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
 
-// --- 2. Mobile Menu Toggle Logic ---
-const menuBtn = document.querySelector('.mobile-menu-toggle');
-const navLinks = document.querySelector('.nav-links');
+    if (!menuBtn || !navLinks) {
+        return;
+    }
 
-menuBtn.addEventListener('click', () => {
-    // Menu ko open/close karo
-    navLinks.classList.toggle('active');
-    
-    // Button ko 'X' animation do
-    menuBtn.classList.toggle('active');
-});
-
-// --- 3. Close menu when a link is clicked (Mobile UX) ---
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        menuBtn.classList.remove('active');
+    menuBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+        menuBtn.classList.toggle("active");
     });
-});
 
+    document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", () => {
+            navLinks.classList.remove("active");
+            menuBtn.classList.remove("active");
+        });
+    });
+}
 
-// --- 4. Contact Form Submission ---
-const contactForm = document.getElementById('contact-form');
-const formStatus = document.getElementById('form-status');
-const formSubmitEndpoint = 'https://formsubmit.co/ajax/mrwahab3745@gmail.com';
+function initContactForm() {
+    const contactForm = document.getElementById("contact-form");
+    const formStatus = document.getElementById("form-status");
+    const formSubmitEndpoint = "https://formsubmit.co/ajax/mrwahab3745@gmail.com";
 
-if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
+    if (!contactForm || !formStatus) {
+        return;
+    }
+
+    contactForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
 
         const submitButton = contactForm.querySelector('button[type="submit"]');
         const formData = new FormData(contactForm);
-        const name = formData.get('name')?.toString().trim();
-        const email = formData.get('email')?.toString().trim();
-        const message = formData.get('message')?.toString().trim();
+        const name = formData.get("name")?.toString().trim();
+        const email = formData.get("email")?.toString().trim();
+        const message = formData.get("message")?.toString().trim();
 
         if (!name || !email || !message) {
-            formStatus.textContent = 'Please fill out all fields.';
+            formStatus.textContent = "Please fill out all fields.";
             return;
         }
 
         submitButton.disabled = true;
-        formStatus.textContent = 'Sending message...';
+        formStatus.textContent = "Sending message...";
 
         try {
             const response = await fetch(formSubmitEndpoint, {
-                method: 'POST',
+                method: "POST",
                 headers: {
-                    Accept: 'application/json'
+                    Accept: "application/json"
                 },
                 body: formData
             });
@@ -213,52 +221,163 @@ if (contactForm) {
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(data?.message || 'Failed to send message.');
+                throw new Error(data?.message || "Failed to send message.");
             }
 
-            formStatus.textContent = 'Message sent successfully. I will contact you soon, InshaAllah.';
+            formStatus.textContent = "Message sent successfully. I will contact you soon, InshaAllah.";
             contactForm.reset();
         } catch (error) {
-            formStatus.textContent = error.message || 'Something went wrong. Please try again.';
+            formStatus.textContent = error.message || "Something went wrong. Please try again.";
         } finally {
             submitButton.disabled = false;
         }
     });
 }
 
-// --- 5. Typing Effect ---
-const texts = ["Frontend Developer", "UI/UX Designer", "Web Developer", "Freelancer"];
-let index = 0;
-let charIndex = 0;
-let isDeleting = false;
+function initTypingEffect() {
+    const texts = ["Frontend Developer", "UI/UX Designer", "Web Developer", "Freelancer"];
+    const typingElement = document.getElementById("typing");
 
-const typingElement = document.getElementById("typing");
+    if (!typingElement) {
+        return;
+    }
 
-function typeEffect() {
-  const currentText = texts[index];
+    let index = 0;
+    let charIndex = 0;
+    let isDeleting = false;
 
-  if (isDeleting) {
-    charIndex--;
-  } else {
-    charIndex++;
-  }
+    function typeEffect() {
+        const currentText = texts[index];
 
-  typingElement.textContent = currentText.substring(0, charIndex);
+        charIndex += isDeleting ? -1 : 1;
+        typingElement.textContent = currentText.substring(0, charIndex);
 
-  let speed = isDeleting ? 50 : 100;
+        let speed = isDeleting ? 50 : 100;
 
-  if (!isDeleting && charIndex === currentText.length) {
-    speed = 1500; // pause after typing
-    isDeleting = true;
-  } else if (isDeleting && charIndex === 0) {
-    isDeleting = false;
-    index = (index + 1) % texts.length;
-    speed = 500;
-  }
+        if (!isDeleting && charIndex === currentText.length) {
+            speed = 1500;
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            index = (index + 1) % texts.length;
+            speed = 500;
+        }
 
-  setTimeout(typeEffect, speed);
+        window.setTimeout(typeEffect, speed);
+    }
+
+    typeEffect();
 }
 
-typeEffect();
+function initGsapAnimations() {
+    if (!gsapLib || prefersReducedMotion) {
+        return;
+    }
+
+    const heroTimeline = gsapLib.timeline({ defaults: { ease: "power3.out" } });
+
+    heroTimeline
+        .from(".logo-container", { y: -24, opacity: 0, duration: 0.7 }, 0)
+        .from(".nav-links li", { y: -18, opacity: 0, duration: 0.45, stagger: 0.08 }, 0.1)
+        .from(".hero h1", { y: 40, opacity: 0, duration: 0.9 }, 0.25)
+        .from(".hero p", { y: 28, opacity: 0, duration: 0.8 }, 0.45)
+        .from(".hero-btns button", { y: 20, opacity: 0, duration: 0.55, stagger: 0.12 }, 0.62);
+
+    gsapLib.utils.toArray(".service-card").forEach((card, index) => {
+        gsapLib.from(card, {
+            y: 64,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            delay: index * 0.05,
+            scrollTrigger: {
+                trigger: card,
+                start: "top 82%"
+            }
+        });
+    });
+
+    gsapLib.utils.toArray(".project-card").forEach((card, index) => {
+        gsapLib.from(card, {
+            y: 72,
+            opacity: 0,
+            scale: 0.94,
+            duration: 0.95,
+            ease: "power3.out",
+            delay: index * 0.08,
+            scrollTrigger: {
+                trigger: card,
+                start: "top 84%"
+            }
+        });
+    });
+
+    gsapLib.utils.toArray(".about p, .contact-connect, .contact form").forEach((element) => {
+        gsapLib.from(element, {
+            y: 42,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: element,
+                start: "top 84%"
+            }
+        });
+    });
+
+    gsapLib.to("#hero-canvas", {
+        yPercent: 8,
+        ease: "none",
+        scrollTrigger: {
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: 1.2
+        }
+    });
+}
+
+function initInteractiveCards() {
+    if (!gsapLib || prefersReducedMotion || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        return;
+    }
+
+    const interactiveCards = document.querySelectorAll(".project-card, .service-card");
+
+    interactiveCards.forEach((card) => {
+        card.addEventListener("mousemove", (event) => {
+            const bounds = card.getBoundingClientRect();
+            const rotateY = ((event.clientX - bounds.left) / bounds.width - 0.5) * 10;
+            const rotateX = ((event.clientY - bounds.top) / bounds.height - 0.5) * -10;
+
+            gsapLib.to(card, {
+                rotateX,
+                rotateY,
+                y: -10,
+                transformPerspective: 900,
+                transformOrigin: "center",
+                duration: 0.35,
+                ease: "power2.out"
+            });
+        });
+
+        card.addEventListener("mouseleave", () => {
+            gsapLib.to(card, {
+                rotateX: 0,
+                rotateY: 0,
+                y: 0,
+                duration: 0.45,
+                ease: "power3.out"
+            });
+        });
+    });
+}
+
+initRevealObserver();
 initHeroCanvas();
 initNavbarAnimations();
+initMobileMenu();
+initContactForm();
+initTypingEffect();
+initGsapAnimations();
+initInteractiveCards();

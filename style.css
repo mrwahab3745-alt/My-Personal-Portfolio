@@ -212,6 +212,9 @@ html {
 
 .hero-btns {
     margin-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .hero button {
@@ -315,6 +318,8 @@ h2 {
     background: rgba(0, 0, 0, 0.85);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
+    transform-style: preserve-3d;
+    will-change: transform;
 }
 
 .service-card i {
@@ -354,6 +359,8 @@ h2 {
     display: flex;
     flex-direction: column;
     text-align: center;
+    transform-style: preserve-3d;
+    will-change: transform;
 }
 
 .project-card img {
@@ -545,9 +552,7 @@ h2 {
 
 /* Animations */
 .reveal-on-scroll,
-.fade-in,
-.service-card,
-.project-card {
+.fade-in {
     opacity: 0;
     transform: translateY(36px);
     transition: opacity 0.8s ease, transform 0.8s ease;
