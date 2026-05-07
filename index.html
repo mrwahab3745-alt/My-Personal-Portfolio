@@ -1,183 +1,278 @@
-<!DOCTYPE html>
+﻿<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Premium Portfolio | Web Developer</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="icon" type="image/png" href="assets/LOGO-OFFICIAL.png">
-    <link rel="stylesheet" href="./style.css">
-</head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="icon" type="image/png" href="assets/LOGO-OFFICIAL.png" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
 
-<body>
-
+  <body>
     <header>
-        <nav class="navbar">
+      <nav class="navbar">
+        <a href="#home" class="logo-container">
+          <img
+            src="./assets/LOGO-OFFICIAL.png"
+            alt="My Logo"
+            class="nav-logo"
+          />
+          <span class="logo-text">Wahab Ahmad</span>
+        </a>
 
-            <a href="#home" class="logo-container">
-                <img src="./assets/LOGO-OFFICIAL.png" alt="My Logo" class="nav-logo">
-                <span class="logo-text">Wahab Ahmad</span>
-            </a>
-            
-            <!-- Mobile Toggle Button -->
-            <button class="mobile-menu-toggle" aria-label="Toggle navigation">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
+        <!-- Mobile Toggle Button -->
+        <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
 
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
     </header>
 
     <section id="home" class="hero">
-        <canvas id="hero-canvas" aria-hidden="true"></canvas>
-        <h1>Hello, I'm a <span id="typing"></span></h1>
-        <p>I create modern, high-performance, and responsive websites that bring your ideas to life.</p>
-        <div class="hero-btns">
-            <button class="hire-btn" onclick="location.href='#contact'">Hire Me</button>
-            <button class="secondary" onclick="location.href='#projects'">View Work</button>
-        </div>
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+      <h1>Hello, I'm a <span id="typing"></span></h1>
+      <p>
+        I create modern, high-performance, and responsive websites that bring
+        your ideas to life.
+      </p>
+      <div class="hero-btns">
+        <button class="hire-btn" onclick="location.href = '#contact'">
+          Hire Me
+        </button>
+        <button class="secondary" onclick="location.href = '#projects'">
+          View Work
+        </button>
+      </div>
     </section>
 
     <section id="about" class="about reveal-on-scroll">
-        <h2>About Me</h2>
-        <p>
-            I'm a Frontend Developer who loves bringing designs to life through clean and efficient code. From modular
-            portfolio templates to "bulletproof" email signatures, I focus on creating accessible and high-performance
-            solutions. I enjoy simplifying complex ideas into intuitive, user-friendly experiences that make a lasting
-            impact.
-        </p>
+      <h2>About Me</h2>
+      <p>
+        I'm a Frontend Developer who loves bringing designs to life through
+        clean and efficient code. From modular portfolio templates to
+        "bulletproof" email signatures, I focus on creating accessible and
+        high-performance solutions. I enjoy simplifying complex ideas into
+        intuitive, user-friendly experiences that make a lasting impact.
+      </p>
     </section>
 
     <section id="services" class="services reveal-on-scroll">
-        <h2>My Services</h2>
-        <div class="service-container">
-            <div class="service-card">
-                <i class="fas fa-code"></i>
-                <h3>Web Design</h3>
-                <p>Modern and aesthetic UI/UX design tailored to your brand.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-mobile-alt"></i>
-                <h3>Responsive</h3>
-                <p>Websites that look stunning on desktops, tablets, and phones.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-briefcase"></i>
-                <h3>Portfolio</h3>
-                <p>Custom-built digital showcases designed to highlight your best work and experience.</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-signature"></i>
-                <h3>E-mail Signature</h3>
-                <p>Professional, branded, and fully clickable signatures for every email you send.</p>
-            </div>
+      <h2>My Services</h2>
+      <div class="service-container">
+        <div class="service-card">
+          <i class="fas fa-code"></i>
+          <h3>Web Design</h3>
+          <p>Modern and aesthetic UI/UX design tailored to your brand.</p>
         </div>
+        <div class="service-card">
+          <i class="fas fa-mobile-alt"></i>
+          <h3>Responsive</h3>
+          <p>Websites that look stunning on desktops, tablets, and phones.</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-briefcase"></i>
+          <h3>Portfolio</h3>
+          <p>
+            Custom-built digital showcases designed to highlight your best work
+            and experience.
+          </p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-signature"></i>
+          <h3>E-mail Signature</h3>
+          <p>
+            Professional, branded, and fully clickable signatures for every
+            email you send.
+          </p>
+        </div>
+      </div>
     </section>
 
     <section id="projects" class="projects reveal-on-scroll">
-        <h2>Recent Projects</h2>
-        <div class="project-container">
-            <a href="https://mrwahab3745-alt.github.io/Email-Template/#" target="_blank" rel="noopener noreferrer" class="project-link">
-                <div class="project-card">
-                    <img src="./assets/Email_temp.png" alt="Creative Email Signature">
-                    <h3>Creative Email Signature</h3>
-                    <div class="project-badges">
-                        <span class="tech-badge">HTML</span>
-                        <span class="tech-badge">CSS</span>
-                        <span class="tech-badge">JavaScript</span>
-                    </div>
-                    <p>A modern, fully clickable email signature with branding, contact details, social links, and a polished corporate look.</p>
-                </div>
-            </a>
-            <a href="https://mrwahab3745-alt.github.io/BMW_Themed_Portfolio/" target="_blank" rel="noopener noreferrer" class="project-link">
-                <div class="project-card">
-                    <img src="./assets/Portfolio_img.png" alt="BMW Themed Portfolio">
-                    <h3>BMW Themed Portfolio</h3>
-                    <div class="project-badges">
-                        <span class="tech-badge">HTML</span>
-                        <span class="tech-badge">CSS</span>
-                        <span class="tech-badge">JavaScript</span>
-                        <span class="tech-badge">GSAP</span>
-                    </div>
-                    <p>A dark, cinematic BMW-inspired portfolio featuring bold typography, immersive hero visuals, and a premium performance theme.</p>
-                </div>
-            </a>
-            <a href="https://mrwahab3745-alt.github.io/Landing-Page/" target="_blank" rel="noopener noreferrer" class="project-link">
-                <div class="project-card">
-                    <img src="./assets/Landing_Page.png" alt="Landing Page">
-                    <h3>Landing Page</h3>
-                    <div class="project-badges">
-                        <span class="tech-badge">HTML</span>
-                        <span class="tech-badge">CSS</span>
-                        <span class="tech-badge">JavaScript</span>
-                    </div>
-                    <p>A conversion-focused landing page with clean sections, strong call-to-actions, trust metrics, and a minimal modern aesthetic.</p>
-                </div>
-            </a>
-        </div>
+      <h2>Recent Projects</h2>
+      <div class="project-container">
+        <a
+          href="https://mrwahab3745-alt.github.io/Email-Template/#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="project-link"
+        >
+          <div class="project-card">
+            <img src="./assets/Email_temp.png" alt="Creative Email Signature" />
+            <h3>Creative Email Signature</h3>
+            <div class="project-badges">
+              <span class="tech-badge">HTML</span>
+              <span class="tech-badge">CSS</span>
+              <span class="tech-badge">JavaScript</span>
+            </div>
+            <p>
+              A modern, fully clickable email signature with branding, contact
+              details, social links, and a polished corporate look.
+            </p>
+          </div>
+        </a>
+        <a
+          href="https://mrwahab3745-alt.github.io/BMW_Themed_Portfolio/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="project-link"
+        >
+          <div class="project-card">
+            <img src="./assets/Portfolio_img.png" alt="BMW Themed Portfolio" />
+            <h3>BMW Themed Portfolio</h3>
+            <div class="project-badges">
+              <span class="tech-badge">HTML</span>
+              <span class="tech-badge">CSS</span>
+              <span class="tech-badge">JavaScript</span>
+              <span class="tech-badge">GSAP</span>
+            </div>
+            <p>
+              A dark, cinematic BMW-inspired portfolio featuring bold
+              typography, immersive hero visuals, and a premium performance
+              theme.
+            </p>
+          </div>
+        </a>
+        <a
+          href="https://mrwahab3745-alt.github.io/Landing-Page/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="project-link"
+        >
+          <div class="project-card">
+            <img src="./assets/Landing_Page.png" alt="Landing Page" />
+            <h3>Landing Page</h3>
+            <div class="project-badges">
+              <span class="tech-badge">HTML</span>
+              <span class="tech-badge">CSS</span>
+              <span class="tech-badge">JavaScript</span>
+            </div>
+            <p>
+              A conversion-focused landing page with clean sections, strong
+              call-to-actions, trust metrics, and a minimal modern aesthetic.
+            </p>
+          </div>
+        </a>
+      </div>
     </section>
 
     <section id="contact" class="contact reveal-on-scroll">
-        <h2>Contact Me</h2>
-        <form id="contact-form" action="https://formsubmit.co/mrwahab3745@gmail.com" method="POST">
-            <input type="hidden" name="_subject" value="New Portfolio Contact Message">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_captcha" value="true">
-            <input type="hidden" name="_next" value="https://mrwahab3745-alt.github.io/My-Personal-Portfolio/#contact">
-            <input type="text" name="_honey" style="display:none">
-            <input type="text" id="name" name="name" placeholder="Your Name" required>
-            <input type="email" id="email" name="email" placeholder="Your Email" required>
-            <textarea id="message" name="message" placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-            <p id="form-status" aria-live="polite"></p>
-        </form>
-        <div class="contact-connect fade-in" aria-label="Professional Links">
-            <p class="contact-connect-title">Or Reach Me On</p>
-            <div class="social-links">
-                <a href="https://github.com/mrwahab3745-alt" target="_blank" rel="noopener noreferrer" class="social-link">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.38 7.86 10.9.58.1.79-.25.79-.56l-.02-1.97c-3.2.69-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.95.1-.75.4-1.25.72-1.54-2.56-.29-5.25-1.28-5.25-5.72 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.03 0 0 .97-.31 3.17 1.18a11.1 11.1 0 0 1 5.78 0c2.19-1.49 3.16-1.18 3.16-1.18.63 1.57.24 2.74.12 3.03.74.81 1.18 1.84 1.18 3.1 0 4.45-2.69 5.42-5.26 5.7.41.36.78 1.08.78 2.18l-.01 3.23c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"></path>
-                    </svg>
-                    <span>GitHub</span>
-                </a>
-                <a href="https://www.linkedin.com/in/wahab-ahmad-6a6514320/" target="_blank" rel="noopener noreferrer" class="social-link">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M4.98 3.5a2.5 2.5 0 1 0 0 5.01 2.5 2.5 0 0 0 0-5Zm-2 6.75h4v12.25h-4V10.25Zm7 0h3.84v1.67h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.66 4.8 6.11v6.52h-4v-5.78c0-1.38-.02-3.16-1.93-3.16-1.93 0-2.23 1.5-2.23 3.06v5.88h-4V10.25Z"></path>
-                    </svg>
-                    <span>LinkedIn</span>
-                </a>
-                <a href="mailto:mrwahab3745@gmail.com" class="social-link">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M3 5.25A2.25 2.25 0 0 1 5.25 3h13.5A2.25 2.25 0 0 1 21 5.25v13.5A2.25 2.25 0 0 1 18.75 21H5.25A2.25 2.25 0 0 1 3 18.75V5.25Zm2.14-.24 6.55 5.53a.5.5 0 0 0 .62 0l6.55-5.53H5.14Zm13.86 2.1-5.44 4.59a2.5 2.5 0 0 1-3.22 0L5 7.11v11.64c0 .14.11.25.25.25h13.5a.25.25 0 0 0 .25-.25V7.11Z"></path>
-                    </svg>
-                    <span>Email</span>
-                </a>
-                <a href="https://www.fiverr.com/wahab_forge" target="_blank" rel="noopener noreferrer" class="social-link">
-                    <span class="social-icon-fiverr" aria-hidden="true">f</span>
-                    <span>Fiverr</span>
-                </a>
-            </div>
+      <h2>Contact Me</h2>
+      <form
+        id="contact-form"
+        action="https://formsubmit.co/mrwahab3745@gmail.com"
+        method="POST"
+      >
+        <input
+          type="hidden"
+          name="_subject"
+          value="New Portfolio Contact Message"
+        />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="true" />
+        <input
+          type="hidden"
+          name="_next"
+          value="https://mrwahab3745-alt.github.io/My-Personal-Portfolio/#contact"
+        />
+        <input type="text" name="_honey" style="display: none" />
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Your Name"
+          required
+        />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Your Email"
+          required
+        />
+        <textarea
+          id="message"
+          name="message"
+          placeholder="Your Message"
+          required
+        ></textarea>
+        <button type="submit">Send Message</button>
+        <p id="form-status" aria-live="polite"></p>
+      </form>
+      <div class="contact-connect fade-in" aria-label="Professional Links">
+        <p class="contact-connect-title">Or Reach Me On</p>
+        <div class="social-links">
+          <a
+            href="https://github.com/mrwahab3745-alt"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.38 7.86 10.9.58.1.79-.25.79-.56l-.02-1.97c-3.2.69-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.95.1-.75.4-1.25.72-1.54-2.56-.29-5.25-1.28-5.25-5.72 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.03 0 0 .97-.31 3.17 1.18a11.1 11.1 0 0 1 5.78 0c2.19-1.49 3.16-1.18 3.16-1.18.63 1.57.24 2.74.12 3.03.74.81 1.18 1.84 1.18 3.1 0 4.45-2.69 5.42-5.26 5.7.41.36.78 1.08.78 2.18l-.01 3.23c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"
+              ></path>
+            </svg>
+            <span>GitHub</span>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/wahab-ahmad-6a6514320/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M4.98 3.5a2.5 2.5 0 1 0 0 5.01 2.5 2.5 0 0 0 0-5Zm-2 6.75h4v12.25h-4V10.25Zm7 0h3.84v1.67h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.66 4.8 6.11v6.52h-4v-5.78c0-1.38-.02-3.16-1.93-3.16-1.93 0-2.23 1.5-2.23 3.06v5.88h-4V10.25Z"
+              ></path>
+            </svg>
+            <span>LinkedIn</span>
+          </a>
+          <a href="mailto:mrwahab3745@gmail.com" class="social-link">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M3 5.25A2.25 2.25 0 0 1 5.25 3h13.5A2.25 2.25 0 0 1 21 5.25v13.5A2.25 2.25 0 0 1 18.75 21H5.25A2.25 2.25 0 0 1 3 18.75V5.25Zm2.14-.24 6.55 5.53a.5.5 0 0 0 .62 0l6.55-5.53H5.14Zm13.86 2.1-5.44 4.59a2.5 2.5 0 0 1-3.22 0L5 7.11v11.64c0 .14.11.25.25.25h13.5a.25.25 0 0 0 .25-.25V7.11Z"
+              ></path>
+            </svg>
+            <span>Email</span>
+          </a>
+          <a
+            href="https://www.fiverr.com/wahab_forge"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+          >
+            <span class="social-icon-fiverr" aria-hidden="true">f</span>
+            <span>Fiverr</span>
+          </a>
         </div>
+      </div>
     </section>
 
     <footer>
-        <p>© 2026 Wahab Ahmad | Designed with Passion</p>
+      <p>© 2026 Wahab Ahmad | Designed with Passion</p>
     </footer>
 
     <script src="./node_modules/gsap/dist/gsap.min.js"></script>
     <script src="./node_modules/gsap/dist/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>

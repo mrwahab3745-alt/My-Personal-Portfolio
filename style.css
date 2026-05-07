@@ -522,21 +522,18 @@ h2 {
 }
 
 .social-link svg {
+    display: block;
+    flex: 0 0 auto;
     width: 18px;
     height: 18px;
     fill: currentColor;
 }
 
-.social-icon-fiverr {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 1;
+.social-link svg path {
+    fill: currentColor;
+}
+
+.social-icon-upwork {
     color: #ffffff;
 }
 
@@ -551,8 +548,12 @@ h2 {
 }
 
 /* Animations */
-.reveal-on-scroll,
-.fade-in {
+.js-enabled .reveal-on-scroll {
+    transform: translateY(36px);
+    transition: transform 0.8s ease;
+}
+
+.js-enabled .fade-in {
     opacity: 0;
     transform: translateY(36px);
     transition: opacity 0.8s ease, transform 0.8s ease;
@@ -567,9 +568,18 @@ h2 {
 footer {
     background: #111;
     color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 64px;
     text-align: center;
-    padding: 25px;
+    padding: 18px 10%;
     font-size: 14px;
+    line-height: 1.5;
+}
+
+footer p {
+    margin: 0;
 }
 
 /* --- Optimized Mobile Responsive Block --- */
