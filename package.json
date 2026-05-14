@@ -1,7 +1,6 @@
 {
   "name": "practice_portfolio",
   "version": "0.1.0",
-  "homepage": ".",
   "dependencies": {
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",

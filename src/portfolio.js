@@ -1,3 +1,5 @@
+/* global gsap, ScrollTrigger */
+/* eslint-disable no-undef -- GSAP and ScrollTrigger load from CDN in index.html before this bundle */
 (function () {
   if (window.__portfolioAnimationsStarted) {
     return;

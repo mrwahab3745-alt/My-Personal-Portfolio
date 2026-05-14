@@ -4,14 +4,19 @@ const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 const path = require("path");
+const fs = require("fs");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const distPath = path.join(__dirname, "build");
+const publicPath = path.join(__dirname, "public");
+const staticRoot = fs.existsSync(path.join(distPath, "index.html")) ? distPath : publicPath;
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname));
+app.use(express.static(staticRoot));
 
 app.post("/api/contact", async (req, res) => {
   const { name, email, message } = req.body;
@@ -61,9 +66,10 @@ app.post("/api/contact", async (req, res) => {
 });
 
 app.get("/", (_, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(path.join(staticRoot, "index.html"));
 });
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Serving static files from: ${staticRoot}`);
 });
