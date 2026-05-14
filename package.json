@@ -1,8 +1,12 @@
 {
   "name": "practice_portfolio",
   "version": "0.1.0",
-  "homepage": "https://mrwahab3745-alt.github.io/My-Personal-Portfolio",
+  "homepage": ".",
   "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "nodemailer": "^8.0.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1"
