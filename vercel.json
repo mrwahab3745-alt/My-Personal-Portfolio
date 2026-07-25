@@ -1,7 +1,3 @@
 {
-  "rootDirectory": "My-Personal-Portfolio-main",
-  "installCommand": "npm install",
-  "buildCommand": "npm run build",
-  "outputDirectory": "build"
+  "cleanUrls": true
 }
-
