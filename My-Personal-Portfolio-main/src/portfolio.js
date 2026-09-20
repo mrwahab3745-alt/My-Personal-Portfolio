@@ -110,8 +110,7 @@
         speed = 420;
       }
 
-      // Store timeout id for cleanup (performance + prevents leaked timers).
-      typingTimeoutId = window.setTimeout(typeEffect, speed);
+      window.setTimeout(typeEffect, speed);
     }
 
     typeEffect();
@@ -133,8 +132,6 @@
     let width = 0;
     let height = 0;
     let particles = [];
-
-    // Store handles for cleanup to avoid leaked animations/listeners.
     let animationId = null;
 
     function createParticle() {
@@ -196,27 +193,19 @@
 
     resizeCanvas();
     drawFrame();
+    window.addEventListener("resize", resizeCanvas);
 
-    // Expose handlers so cleanup can remove them.
-    heroResizeHandler = resizeCanvas;
-    heroAnimationFrameId = animationId;
-
-    window.addEventListener("resize", heroResizeHandler);
-
-    heroVisibilityHandler = () => {
-      if (document.hidden && heroAnimationFrameId) {
-        window.cancelAnimationFrame(heroAnimationFrameId);
-        heroAnimationFrameId = null;
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && animationId) {
+        window.cancelAnimationFrame(animationId);
         animationId = null;
         return;
       }
 
-      if (!document.hidden && !heroAnimationFrameId) {
+      if (!document.hidden && !animationId) {
         drawFrame();
       }
-    };
-
-    document.addEventListener("visibilitychange", heroVisibilityHandler);
+    });
   }
 
   function initNavbar() {
@@ -268,12 +257,8 @@
     }
 
     updateNavbarState();
-    // Store handlers for cleanup.
-    navbarScrollHandler = updateNavbarState;
-    navbarResizeHandler = updateNavbarState;
-
-    window.addEventListener("scroll", navbarScrollHandler, { passive: true });
-    window.addEventListener("resize", navbarResizeHandler);
+    window.addEventListener("scroll", updateNavbarState, { passive: true });
+    window.addEventListener("resize", updateNavbarState);
 
     if (menuBtn && navLinks) {
       menuBtn.addEventListener("click", () => {
@@ -432,9 +417,7 @@
       dot.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
     }
 
-    // Store handler for cleanup.
-    customCursorPointerMoveHandler = onMove;
-    window.addEventListener("pointermove", customCursorPointerMoveHandler, { passive: true });
+    window.addEventListener("pointermove", onMove, { passive: true });
     rafId = window.requestAnimationFrame(render);
 
     document.addEventListener("visibilitychange", () => {
@@ -452,61 +435,58 @@
       return;
     }
 
-    // Scope GSAP animations to allow cleanup via gsap.context().
-    gsapCtx = gsapLib.context(() => {
-      gsapLib
-        .timeline({ defaults: { ease: "power3.out" } })
-        .from(".logo-container", { y: -18, opacity: 0, duration: 0.65 }, 0)
-        .from(".nav-links li", { y: -14, opacity: 0, duration: 0.42, stagger: 0.07 }, 0.08)
-        .from(".hero-inner", { y: 36, opacity: 0, duration: 0.95 }, 0.18)
-        .from(".hero-btns .btn", { y: 18, opacity: 0, duration: 0.55, stagger: 0.1 }, 0.45);
+    gsapLib
+      .timeline({ defaults: { ease: "power3.out" } })
+      .from(".logo-container", { y: -18, opacity: 0, duration: 0.65 }, 0)
+      .from(".nav-links li", { y: -14, opacity: 0, duration: 0.42, stagger: 0.07 }, 0.08)
+      .from(".hero-inner", { y: 36, opacity: 0, duration: 0.95 }, 0.18)
+      .from(".hero-btns .btn", { y: 18, opacity: 0, duration: 0.55, stagger: 0.1 }, 0.45);
 
-      gsapLib.utils.toArray(".service-card").forEach((card, index) => {
-        gsapLib.from(card, {
-          y: 56,
-          opacity: 0,
-          duration: 0.75,
-          ease: "power3.out",
-          delay: index * 0.05,
-          scrollTrigger: { trigger: card, start: "top 86%" }
-        });
+    gsapLib.utils.toArray(".service-card").forEach((card, index) => {
+      gsapLib.from(card, {
+        y: 56,
+        opacity: 0,
+        duration: 0.75,
+        ease: "power3.out",
+        delay: index * 0.05,
+        scrollTrigger: { trigger: card, start: "top 86%" }
       });
-
-      gsapLib.utils.toArray(".project-card").forEach((card, index) => {
-        gsapLib.from(card, {
-          y: 64,
-          opacity: 0,
-          scale: 0.96,
-          duration: 0.85,
-          ease: "power3.out",
-          delay: index * 0.06,
-          scrollTrigger: { trigger: card, start: "top 88%" }
-        });
-      });
-
-      gsapLib.utils.toArray(".about-grid, .skills-panel, .contact-layout").forEach((block) => {
-        gsapLib.from(block, {
-          y: 36,
-          opacity: 0,
-          duration: 0.75,
-          ease: "power2.out",
-          scrollTrigger: { trigger: block, start: "top 86%" }
-        });
-      });
-
-      if (scrollTriggerPlugin) {
-        gsapLib.to("#hero-canvas", {
-          yPercent: 10,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".hero",
-            start: "top top",
-            end: "bottom top",
-            scrub: 1.1
-          }
-        });
-      }
     });
+
+    gsapLib.utils.toArray(".project-card").forEach((card, index) => {
+      gsapLib.from(card, {
+        y: 64,
+        opacity: 0,
+        scale: 0.96,
+        duration: 0.85,
+        ease: "power3.out",
+        delay: index * 0.06,
+        scrollTrigger: { trigger: card, start: "top 88%" }
+      });
+    });
+
+    gsapLib.utils.toArray(".about-grid, .skills-panel, .contact-layout").forEach((block) => {
+      gsapLib.from(block, {
+        y: 36,
+        opacity: 0,
+        duration: 0.75,
+        ease: "power2.out",
+        scrollTrigger: { trigger: block, start: "top 86%" }
+      });
+    });
+
+    if (scrollTriggerPlugin) {
+      gsapLib.to("#hero-canvas", {
+        yPercent: 10,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "top top",
+          end: "bottom top",
+          scrub: 1.1
+        }
+      });
+    }
   }
 
   function initInteractiveCards() {
@@ -559,211 +539,9 @@
     initInteractiveCards();
   }
 
-  let cleanup = null;
-
-  function initAppOnce() {
-    if (cleanup) return;
-    initApp();
-    cleanup = function () {
-      try {
-        if (typingTimeoutId) {
-          window.clearTimeout(typingTimeoutId);
-          typingTimeoutId = null;
-        }
-        if (heroAnimationFrameId) {
-          window.cancelAnimationFrame(heroAnimationFrameId);
-          heroAnimationFrameId = null;
-        }
-        if (heroResizeHandler) {
-          window.removeEventListener("resize", heroResizeHandler);
-          heroResizeHandler = null;
-        }
-        if (heroVisibilityHandler) {
-          document.removeEventListener("visibilitychange", heroVisibilityHandler);
-          heroVisibilityHandler = null;
-        }
-
-        if (navbarScrollHandler) {
-          window.removeEventListener("scroll", navbarScrollHandler);
-          navbarScrollHandler = null;
-        }
-        if (navbarResizeHandler) {
-          window.removeEventListener("resize", navbarResizeHandler);
-          navbarResizeHandler = null;
-        }
-
-        if (customCursorPointerMoveHandler) {
-          window.removeEventListener("pointermove", customCursorPointerMoveHandler);
-          customCursorPointerMoveHandler = null;
-        }
-
-        if (gsapCtx) {
-          gsapCtx.revert();
-          gsapCtx = null;
-        }
-      } catch {
-        // ignore cleanup errors
-      }
-    };
-  }
-
-  let typingTimeoutId = null;
-  let heroAnimationFrameId = null;
-  let heroResizeHandler = null;
-  let heroVisibilityHandler = null;
-  let navbarScrollHandler = null;
-  let navbarResizeHandler = null;
-  let customCursorPointerMoveHandler = null;
-  let gsapCtx = null;
-
-  // Patch a few initializers to store cleanup handles.
-  // (Logic is unchanged; this only prevents leaked listeners/animations.)
-  const origInitTypingEffect = initTypingEffect;
-  initTypingEffect = function () {
-    const typingElement = document.getElementById("typing");
-    if (!typingElement) return;
-
-    const texts = ["Frontend Developer", "UI Engineer", "React Developer", "Full-Stack Builder", "Freelancer"];
-    let index = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-
-    function typeEffect() {
-      const currentText = texts[index];
-      charIndex += isDeleting ? -1 : 1;
-      typingElement.textContent = currentText.substring(0, Math.max(charIndex, 0));
-
-      let speed = isDeleting ? 45 : 95;
-
-      if (!isDeleting && charIndex === currentText.length) {
-        speed = 1500;
-        isDeleting = true;
-      } else if (isDeleting && charIndex <= 0) {
-        isDeleting = false;
-        charIndex = 0;
-        index = (index + 1) % texts.length;
-        speed = 420;
-      }
-
-      typingTimeoutId = window.setTimeout(typeEffect, speed);
-    }
-
-    typeEffect();
-  };
-
-  const origInitHeroCanvas = initHeroCanvas;
-  initHeroCanvas = function () {
-    const canvas = document.getElementById("hero-canvas");
-    const hero = document.querySelector(".hero");
-
-    if (!canvas || !hero || prefersReducedMotion) return;
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let width = 0;
-    let height = 0;
-    let particles = [];
-
-    function createParticle() {
-      return {
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.55,
-        vy: (Math.random() - 0.5) * 0.55,
-        radius: Math.random() * 1.6 + 0.9
-      };
-    }
-
-    function resizeCanvas() {
-      width = hero.clientWidth;
-      height = hero.clientHeight;
-      canvas.width = width;
-      canvas.height = height;
-
-      const particleCount = Math.max(26, Math.min(64, Math.floor((width * height) / 26000)));
-      particles = Array.from({ length: particleCount }, createParticle);
-    }
-
-    function drawFrame() {
-      ctx.clearRect(0, 0, width, height);
-
-      for (let i = 0; i < particles.length; i++) {
-        const particle = particles[i];
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-
-        if (particle.x <= 0 || particle.x >= width) particle.vx *= -1;
-        if (particle.y <= 0 || particle.y >= height) particle.vy *= -1;
-
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(56, 189, 248, 0.75)";
-        ctx.fill();
-
-        for (let j = i + 1; j < particles.length; j++) {
-          const nextParticle = particles[j];
-          const dx = particle.x - nextParticle.x;
-          const dy = particle.y - nextParticle.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < 118) {
-            const alpha = (1 - distance / 118) * 0.32;
-            ctx.beginPath();
-            ctx.moveTo(particle.x, particle.y);
-            ctx.lineTo(nextParticle.x, nextParticle.y);
-            ctx.strokeStyle = "rgba(168, 85, 247, " + alpha + ")";
-            ctx.lineWidth = 1;
-            ctx.stroke();
-          }
-        }
-      }
-
-      heroAnimationFrameId = window.requestAnimationFrame(drawFrame);
-    }
-
-    resizeCanvas();
-    drawFrame();
-
-    heroResizeHandler = resizeCanvas;
-    window.addEventListener("resize", heroResizeHandler);
-
-    heroVisibilityHandler = () => {
-      if (document.hidden && heroAnimationFrameId) {
-        window.cancelAnimationFrame(heroAnimationFrameId);
-        heroAnimationFrameId = null;
-        return;
-      }
-
-      if (!document.hidden && !heroAnimationFrameId) {
-        drawFrame();
-      }
-    };
-
-    document.addEventListener("visibilitychange", heroVisibilityHandler);
-  };
-
-  function wrapInitGsapAnimations() {
-    // Keep existing behavior but ensure GSAP can be reverted.
-    const original = initGsapAnimations;
-    initGsapAnimations = function () {
-      if (!gsapLib || prefersReducedMotion) return;
-
-      // @ts-ignore
-      gsapCtx = gsapLib.context(() => {
-        original();
-      });
-    };
-  }
-  wrapInitGsapAnimations();
-
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initAppOnce);
+    document.addEventListener("DOMContentLoaded", initApp);
   } else {
-    initAppOnce();
+    initApp();
   }
-
-  window.addEventListener("pagehide", () => {
-    if (cleanup) cleanup();
-  });
 })();

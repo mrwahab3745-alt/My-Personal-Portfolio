@@ -7,50 +7,14 @@
       name="description"
       content="Wahab Ahmad — Frontend developer crafting fast, accessible, and polished web experiences."
     />
-    <meta
-      name="google-site-verification"
-      content="JnfwyJgmEHnkTvITyhB5nSwvR44AFbNr5LWs2RWd-04"
-    />
     <title>Wahab Ahmad | Full-Stack &amp; Frontend Portfolio</title>
-
-    <!-- Person Schema Markup for SEO -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Wahab Ahmad",
-        "url": "https://vercel.app",
-        "jobTitle": "Full-Stack & Frontend Developer",
-        "sameAs": [
-          "https://github.com/mrwahab3745-alt",
-          "https://www.linkedin.com/in/wahab-ahmad-6a6514320/"
-        ],
-        "knowsAbout": [
-          "React",
-          "JavaScript",
-          "CSS",
-          "HTML",
-          "Node.js",
-          "MongoDB",
-          "SQL"
-        ]
-      }
-    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-      rel="preload"
-      as="style"
+    <link
       href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Syne:wght@500;600;700;800&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'"
+      rel="stylesheet"
     />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Syne:wght@500;600;700;800&display=swap"
-      />
-    </noscript>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -293,7 +257,7 @@
         <div class="project-grid">
           <article class="project-card glass-card">
             <div class="project-media">
-              <img src="/assets/Email_temp.webp" alt="Creative email signature preview" loading="eager" width="800" height="500" fetchpriority="high" />
+              <img src="%PUBLIC_URL%/assets/Email_temp.png" alt="Creative email signature preview" loading="lazy" />
             </div>
             <div class="project-body">
               <h3>Creative email signature</h3>
@@ -324,7 +288,7 @@
 
           <article class="project-card glass-card">
             <div class="project-media">
-              <img src="/assets/Portfolio_img.webp" alt="BMW themed portfolio preview" loading="lazy" width="800" height="500" />
+              <img src="%PUBLIC_URL%/assets/Portfolio_img.png" alt="BMW themed portfolio preview" loading="lazy" />
             </div>
             <div class="project-body">
               <h3>BMW themed portfolio</h3>
@@ -356,7 +320,7 @@
 
           <article class="project-card glass-card">
             <div class="project-media">
-              <img src="/assets/Landing_Page.webp" alt="Landing page preview" loading="eager" width="800" height="500" fetchpriority="high" />
+              <img src="%PUBLIC_URL%/assets/Landing_Page.png" alt="Landing page preview" loading="lazy" />
             </div>
             <div class="project-body">
               <h3>Landing page</h3>
@@ -387,17 +351,16 @@
 
           <article class="project-card glass-card">
             <div class="project-media project-media--placeholder ph-emerald">
-              <img src="/assets/Graphic_Designer.webp" alt="Graphic Designer Portfolio" loading="lazy" width="600" height="400" />
-              <span class="ph-label">Umme Aiman - Graphic Design Portfolio</span>
-
+              <span class="ph-icon" aria-hidden="true"><i class="fas fa-car"></i></span>
+              <span class="ph-label">Car showroom system</span>
             </div>
             <div class="project-body">
-              <h3>Umme Aiman - Graphic Design Portfolio</h3>
-              <p>A modern, highly visual graphic design portfolio featuring brand identities, social media campaigns, and custom marketing layouts with strong typography.</p>
+              <h3>Car showroom management</h3>
+              <p>Inventory-focused workflow concept: listings, status, and showroom-ready presentation layer.</p>
               <div class="project-badges">
-                <span class="tech-badge">HTML</span>
-                <span class="tech-badge">CSS</span>
-                <span class="tech-badge">JavaScript</span>
+                <span class="tech-badge">React</span>
+                <span class="tech-badge">Node.js</span>
+                <span class="tech-badge">MongoDB</span>
               </div>
               <div class="project-actions">
                 <a
@@ -417,10 +380,8 @@
                   >Source</a
                 >
               </div>
-
             </div>
           </article>
-
 
           <article class="project-card glass-card">
             <div class="project-media project-media--placeholder ph-violet">
@@ -520,7 +481,7 @@
       <p>© 2026 Wahab Ahmad · Crafted with curiosity and caffeine</p>
     </footer>
 
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </body>
 </html>
