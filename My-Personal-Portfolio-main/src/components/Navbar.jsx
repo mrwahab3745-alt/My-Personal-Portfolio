@@ -89,7 +89,7 @@ function Navbar() {
           ref={navbarRef}
         >
           <a href="#home" className="logo-container">
-            <img src="/assets/LOGO-OFFICIAL.webp" alt="" className="nav-logo" width="40" height="40" />
+            <img src="/assets/LOGO-OFFICIAL.webp" alt="" className="nav-logo" width="53" height="50" />
             <span className="logo-text">Wahab Ahmad</span>
           </a>
           <button

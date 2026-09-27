@@ -5,6 +5,8 @@ const projects = [
     description: "Clickable, branded signature with social links and a polished corporate look.",
     image: "/assets/Email_temp.webp",
     imageAlt: "Creative email signature preview",
+    imageWidth: 967,
+    imageHeight: 491,
     badges: ["HTML", "CSS", "JavaScript"],
     actions: [
       { label: "Live demo", href: "https://mrwahab3745-alt.github.io/Email-Template/#", style: "primary" },
@@ -17,6 +19,8 @@ const projects = [
     description: "Cinematic, dark UI with bold typography and immersive hero treatments.",
     image: "/assets/Portfolio_img.webp",
     imageAlt: "BMW themed portfolio preview",
+    imageWidth: 1920,
+    imageHeight: 885,
     badges: ["HTML", "CSS", "JavaScript", "GSAP"],
     actions: [
       { label: "Live demo", href: "https://mrwahab3745-alt.github.io/BMW_Themed_Portfolio/", style: "primary" },
@@ -29,6 +33,8 @@ const projects = [
     description: "High-conversion layout with trust blocks, CTAs, and a minimal modern aesthetic.",
     image: "/assets/Landing_Page.webp",
     imageAlt: "Landing page preview",
+    imageWidth: 1920,
+    imageHeight: 881,
     badges: ["HTML", "CSS", "JavaScript"],
     actions: [
       { label: "Live demo", href: "https://mrwahab3745-alt.github.io/Landing-Page/", style: "primary" },
@@ -76,7 +82,13 @@ function Projects() {
           <article className="project-card glass-card" key={project.id}>
             <div className={project.image ? "project-media" : `project-media project-media--placeholder ${project.placeholderClass}`}>
               {project.image ? (
-                <img src={project.image} alt={project.imageAlt} loading="lazy" />
+                <img
+                  src={project.image}
+                  alt={project.imageAlt}
+                  width={project.imageWidth}
+                  height={project.imageHeight}
+                  loading="lazy"
+                />
               ) : (
                 <>
                   <span className="ph-icon" aria-hidden="true"><i className={project.placeholderIcon}></i></span>

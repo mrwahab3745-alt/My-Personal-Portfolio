@@ -181,8 +181,9 @@ body.use-custom-cursor .cursor-ring {
 }
 
 .nav-logo {
-  height: 40px;
-  width: auto;
+  width: 53px;
+  height: 50px;
+  object-fit: contain;
   border-radius: 10px;
   transition: transform 0.25s ease, filter 0.25s ease;
 }
@@ -794,6 +795,8 @@ body.use-custom-cursor .cursor-ring {
 }
 
 .project-media img {
+  aspect-ratio: 16 / 10;
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
