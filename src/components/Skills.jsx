@@ -68,7 +68,7 @@ function Skills() {
         ))}
       </div>
       <div className="skills-panel glass-card">
-        <div className="skill-rows">
+        <div className="skill-rows responsive-grid">
           {skills.map((skill) => (
             <div
               className={`skill-row${activeSkill && activeSkill !== skill.key ? " dimmed" : ""}`}

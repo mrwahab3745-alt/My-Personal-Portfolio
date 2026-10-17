@@ -52,6 +52,18 @@ function Navbar() {
   }, []);
 
   useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 768px)");
+    const closeOnDesktop = (event) => {
+      if (!event.matches) {
+        setMenuOpen(false);
+      }
+    };
+
+    mobileQuery.addEventListener("change", closeOnDesktop);
+    return () => mobileQuery.removeEventListener("change", closeOnDesktop);
+  }, []);
+
+  useEffect(() => {
     document.body.classList.toggle("nav-open", menuOpen);
     if (!menuOpen) {
       return () => document.body.classList.remove("nav-open");
@@ -88,7 +100,7 @@ function Navbar() {
           aria-label="Primary"
           ref={navbarRef}
         >
-          <a href="#home" className="logo-container">
+          <a href="#home" className="logo-container" onClick={closeMenu}>
             <picture>
               <source srcSet="/assets/logo-official-300.avif" type="image/avif" />
               <img
@@ -116,7 +128,11 @@ function Navbar() {
             <span className="bar" aria-hidden="true"></span>
             <span className="bar" aria-hidden="true"></span>
           </button>
-          <ul className={`nav-links${menuOpen ? " active" : ""}`} id="primary-nav">
+          <ul
+            className={`nav-links${menuOpen ? " active" : ""}`}
+            id="primary-nav"
+            aria-hidden={!menuOpen && window.matchMedia("(max-width: 768px)").matches}
+          >
             {navigationItems.map(({ label, href }) => (
               <li key={href}>
                 <a

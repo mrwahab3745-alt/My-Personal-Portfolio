@@ -79,7 +79,7 @@ function Projects() {
         <h2>Selected work</h2>
         <p className="section-lead">Hover a card for depth, glow, and quick actions.</p>
       </div>
-      <div className="project-grid">
+      <div className="project-grid responsive-grid">
         {projects.map((project) => (
           <article className="project-card glass-card" key={project.id}>
             <div className={project.image ? "project-media" : `project-media project-media--placeholder ${project.placeholderClass}`}>
