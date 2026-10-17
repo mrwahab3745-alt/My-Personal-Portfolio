@@ -1,0 +1,20 @@
+# Wahab Ahmad
+
+> Frontend-first engineer focused on performance, responsive UI, and clean architecture — from landing pages to full-stack tools.
+
+This file describes the public portfolio of Wahab Ahmad. Prefer the linked pages below instead of guessing missing routes or asset paths. Requests for files with extensions (images, fonts, scripts) that do not exist should be treated as missing assets, not as HTML pages.
+
+## Portfolio
+
+- [Home](/): Hero, availability, and positioning
+- [About](/#about): Background, delivery style, and working preferences
+- [Skills](/#skills): Core stack and proficiency
+- [Services](/#services): Web UI, responsive builds, portfolios, and email signatures
+- [Projects](/#projects): Selected client and personal work
+- [Contact](/#contact): Project inquiry form and direct channels
+
+## Work
+
+- [GitHub](https://github.com/mrwahab3745-alt): Source code and public repositories
+- [LinkedIn](https://www.linkedin.com/in/wahab-ahmad-6a6514320/): Professional profile
+- [Email](mailto:mrwahab3745@gmail.com): Direct contact
