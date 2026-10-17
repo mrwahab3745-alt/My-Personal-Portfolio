@@ -67,7 +67,7 @@ function Contact() {
         <h2>Let us build something excellent</h2>
         <p className="section-lead">Tell me about your timeline, goals, and budget range — I reply within one business day.</p>
       </div>
-      <div className="contact-layout">
+      <div className="contact-layout reveal-block">
         <form id="contact-form" className="contact-form glass-card" action="https://formsubmit.co/mrwahab3745@gmail.com" method="POST" noValidate onSubmit={handleSubmit}>
           <input type="hidden" name="_subject" defaultValue="New Portfolio Contact Message" />
           <input type="hidden" name="_template" defaultValue="table" />

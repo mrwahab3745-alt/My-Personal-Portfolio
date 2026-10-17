@@ -7,7 +7,7 @@ function About() {
         <p className="eyebrow">About</p>
         <h2>Precision UI, pragmatic engineering</h2>
       </div>
-      <div className="about-grid">
+      <div className="about-grid reveal-block">
         <div className="glass-card about-card">
           <p>
             I am a frontend developer who enjoys turning complex requirements into calm, intuitive interfaces.

@@ -23,7 +23,7 @@ const projects = [
     imageAlt: "BMW themed portfolio preview",
     imageWidth: 1920,
     imageHeight: 885,
-    badges: ["HTML", "CSS", "JavaScript", "GSAP"],
+    badges: ["HTML", "CSS", "JavaScript", "Motion design"],
     actions: [
       { label: "Live demo", href: "https://mrwahab3745-alt.github.io/BMW_Themed_Portfolio/", style: "primary" },
       { label: "Source", href: "https://github.com/mrwahab3745-alt", style: "ghost" }
@@ -80,8 +80,12 @@ function Projects() {
         <p className="section-lead">Hover a card for depth, glow, and quick actions.</p>
       </div>
       <div className="project-grid responsive-grid">
-        {projects.map((project) => (
-          <article className="project-card glass-card" key={project.id}>
+        {projects.map((project, index) => (
+          <article
+            className="project-card glass-card reveal-item"
+            style={{ "--reveal-delay": `${index * 60}ms` }}
+            key={project.id}
+          >
             <div className={project.image ? "project-media" : `project-media project-media--placeholder ${project.placeholderClass}`}>
               {project.image ? (
                 <img

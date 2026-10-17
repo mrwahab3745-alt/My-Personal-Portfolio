@@ -67,7 +67,7 @@ function Skills() {
           </button>
         ))}
       </div>
-      <div className="skills-panel glass-card">
+      <div className="skills-panel glass-card reveal-block">
         <div className="skill-rows responsive-grid">
           {skills.map((skill) => (
             <div

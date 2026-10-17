@@ -20,9 +20,10 @@ function App() {
     }
 
     document.body.classList.add("js-enabled");
-    const revealElements = app.querySelectorAll(".reveal-on-scroll, .fade-in");
+    const revealElements = app.querySelectorAll(
+      ".reveal-on-scroll, .fade-in, .reveal-block, .reveal-item"
+    );
     let revealObserver;
-    let cancelled = false;
 
     if (prefersReducedMotion || !("IntersectionObserver" in window)) {
       revealElements.forEach((element) => element.classList.add("show"));
@@ -41,109 +42,8 @@ function App() {
       revealElements.forEach((element) => revealObserver.observe(element));
     }
 
-    let animationContext;
-    const cardListeners = [];
-
-    if (!prefersReducedMotion) {
-      Promise.all([import("gsap"), import("gsap/ScrollTrigger")]).then(([{ gsap }, { ScrollTrigger }]) => {
-        if (cancelled || !appRef.current) {
-          return;
-        }
-
-        gsap.registerPlugin(ScrollTrigger);
-        animationContext = gsap.context(() => {
-        gsap
-          .timeline({ defaults: { ease: "power3.out" } })
-          .from(".logo-container", { y: -18, opacity: 0, duration: 0.65 }, 0)
-          .from(".nav-links li", { y: -14, opacity: 0, duration: 0.42, stagger: 0.07 }, 0.08)
-          .from(".hero-inner", { y: 36, opacity: 0, duration: 0.95 }, 0.18)
-          .from(".hero-btns .btn", { y: 18, opacity: 0, duration: 0.55, stagger: 0.1 }, 0.45);
-
-        app.querySelectorAll(".service-card").forEach((card, index) => {
-          gsap.from(card, {
-            y: 56,
-            opacity: 0,
-            duration: 0.75,
-            ease: "power3.out",
-            delay: index * 0.05,
-            scrollTrigger: { trigger: card, start: "top 86%" }
-          });
-        });
-
-        app.querySelectorAll(".project-card").forEach((card, index) => {
-          gsap.from(card, {
-            y: 64,
-            opacity: 0,
-            scale: 0.96,
-            duration: 0.85,
-            ease: "power3.out",
-            delay: index * 0.06,
-            scrollTrigger: { trigger: card, start: "top 88%" }
-          });
-        });
-
-        app.querySelectorAll(".about-grid, .skills-panel, .contact-layout").forEach((block) => {
-          gsap.from(block, {
-            y: 36,
-            opacity: 0,
-            duration: 0.75,
-            ease: "power2.out",
-            scrollTrigger: { trigger: block, start: "top 86%" }
-          });
-        });
-
-        gsap.to("#hero-canvas", {
-          yPercent: 10,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".hero",
-            start: "top top",
-            end: "bottom top",
-            scrub: 1.1
-          }
-        });
-      }, app);
-
-      const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-      if (finePointer) {
-        app.querySelectorAll(".project-card, .service-card").forEach((card) => {
-          const rotateXTo = gsap.quickTo(card, "rotationX", { duration: 0.35, ease: "power2.out" });
-          const rotateYTo = gsap.quickTo(card, "rotationY", { duration: 0.35, ease: "power2.out" });
-          const moveYTo = gsap.quickTo(card, "y", { duration: 0.35, ease: "power2.out" });
-          const onPointerMove = (event) => {
-            const bounds = card.getBoundingClientRect();
-            rotateYTo(((event.clientX - bounds.left) / bounds.width - 0.5) * 9);
-            rotateXTo(((event.clientY - bounds.top) / bounds.height - 0.5) * -9);
-            moveYTo(-6);
-          };
-          const onPointerLeave = () => {
-            gsap.to(card, {
-              rotationX: 0,
-              rotationY: 0,
-              y: 0,
-              duration: 0.45,
-              ease: "power3.out"
-            });
-          };
-
-          card.addEventListener("pointermove", onPointerMove, { passive: true });
-          card.addEventListener("pointerleave", onPointerLeave);
-          cardListeners.push(() => {
-            card.removeEventListener("pointermove", onPointerMove);
-            card.removeEventListener("pointerleave", onPointerLeave);
-            gsap.killTweensOf(card);
-            gsap.set(card, { clearProps: "transform" });
-          });
-        });
-      }
-      });
-    }
-
     return () => {
-      cancelled = true;
       revealObserver?.disconnect();
-      cardListeners.forEach((removeListeners) => removeListeners());
-      animationContext?.revert();
       document.body.classList.remove("js-enabled");
     };
   }, [prefersReducedMotion]);
@@ -224,22 +124,22 @@ function App() {
             <h2>What I can build for you</h2>
           </div>
           <div className="service-grid">
-            <article className="service-card glass-card">
+            <article className="service-card glass-card reveal-item" style={{ "--reveal-delay": "0ms" }}>
               <div className="service-icon"><Icon name="code" /></div>
               <h3>Web design &amp; UI</h3>
               <p>Modern interfaces with crisp hierarchy, motion, and conversion-focused layout.</p>
             </article>
-            <article className="service-card glass-card">
+            <article className="service-card glass-card reveal-item" style={{ "--reveal-delay": "50ms" }}>
               <div className="service-icon"><Icon name="smartphone" /></div>
               <h3>Responsive builds</h3>
               <p>Flawless scaling from mobile to ultrawide with accessible, touch-friendly interactions.</p>
             </article>
-            <article className="service-card glass-card">
+            <article className="service-card glass-card reveal-item" style={{ "--reveal-delay": "100ms" }}>
               <div className="service-icon"><Icon name="briefcase" /></div>
               <h3>Portfolios &amp; brands</h3>
               <p>Showcase sites that highlight your story, metrics, and featured work with style.</p>
             </article>
-            <article className="service-card glass-card">
+            <article className="service-card glass-card reveal-item" style={{ "--reveal-delay": "150ms" }}>
               <div className="service-icon"><Icon name="signature" /></div>
               <h3>Email signatures</h3>
               <p>Branded, bulletproof signatures that render consistently across major email clients.</p>
